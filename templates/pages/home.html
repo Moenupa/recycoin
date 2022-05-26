@@ -7,5 +7,11 @@
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
   <img src="{% static 'images/logo.png' %}" class="img-fluid" alt="Recycoin logo"/>
   <p class="lead">A Django starter project with batteries.</p>
+  {% if user.is_authenticated %}
+  <a class="btn btn-success" href="/getcoins">
+    <i class="mr-1 fa-solid fa-coins"></i>
+    Get Coins</a>
+  <a class="btn btn-success" href="/exchange"><i class="mr-1 fa-solid fa-gifts"></i>Exchange Prize</a>
+  {% endif %}
 </div>
 {% endblock flex %}

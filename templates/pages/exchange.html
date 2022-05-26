@@ -2,46 +2,40 @@
 {% block title %}Log in{% endblock title %}
 {% block content %}
 
-<h2 class="mb-4">Welcome to RECYCOIN</h2>
-<form method="post" class="w-100">
-  {% csrf_token %}
-  <div id="div_id_login" class="form-group row">
-    <label for="id_login" class="col-sm-2 col-form-label requiredField">
-      E-mail
-    </label>
-    <div class="col-sm-10">
-      <input
-        type="email"
-        name="login"
-        placeholder="E-mail address"
-        autocomplete="email"
-        class="textinput textInput form-control"
-        required=""
-        id="id_login"
-      />
+<div class="d-flex align-items-center">
+  <div class="h2 w-100">
+    <div class="h2 w-100">
+      Price Exchange
+    </div>
+    <div class="h6 w-100 text-secondary">
+      Exchange your recycoins to prizes! You've earned it!
     </div>
   </div>
-  <div id="div_id_password" class="form-group row">
-    <label for="id_password" class="requiredField col-sm-2 col-form-label">
-      Password
-    </label>
-    <div class="col-sm-10">
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        autocomplete="current-password"
-        class="textinput textInput form-control"
-        required=""
-        id="id_password"
-      />
-    </div>
+  <div class="h5 w-100 text-right text-success">
+    <i class="fa-solid fa-coins"></i>
+    {{ user.wallet }}
   </div>
+</div>
 
-  <div class="d-flex justify-content-center align-items-center flex-column">
-    <div class="d-flex justify-content-center align-items-center flex-column">
-      <button class="btn btn-success px-4" type="submit">Log in</button>
+{{ msg }}
+<div class="row">
+{% for prize in prizes %}
+<div class="col-12 {% if prizes.count >= 3 %}col-lg-4 {% endif %}{% if prizes.count >= 2 %}col-md-6 {% endif %}p-2">
+  <div class="card w-100" style="width: 18rem;">
+    <img class="card-img-top" src={{prize.img}} alt={{prize.img}}>
+    <div class="card-body">
+      <h5 class="card-title text-capitalize">{{ prize.item }}</h5>
+      <p class="card-text text-warning float-right"><i class="fa-solid fa-coins"></i> {{ prize.price }}</p>
+      {% if not lock %}
+      <form method="post" action="/exchange/">
+        {% csrf_token %}
+        <input type="hidden" name="prize" value={{prize.id}}/>
+        <button class="btn btn-sm btn-success px-4" type="submit"><i class="mr-2 fa-solid fa-right-left"></i>Exchange</button>
+      </form>
+      {% endif %}
     </div>
   </div>
-</form>
+</div>
+{% endfor %}
+</div>
 {% endblock content %}
