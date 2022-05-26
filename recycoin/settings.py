@@ -23,8 +23,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
     # Third-party
-    "allauth",
-    "allauth.account",
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     "crispy_forms",
     "debug_toolbar",
     # Local
@@ -50,9 +51,9 @@ MIDDLEWARE = [
 # URLS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
-ROOT_URLCONF = "django_project.urls"
+ROOT_URLCONF = "recycoin.urls"
 # https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
-WSGI_APPLICATION = "django_project.wsgi.application"
+WSGI_APPLICATION = "recycoin.wsgi.application"
 
 # TEMPLATES
 # ------------------------------------------------------------------------------
@@ -171,7 +172,7 @@ ACCOUNT_LOGOUT_REDIRECT_URL = "home"
 # https://django-allauth.readthedocs.io/en/latest/installation.html?highlight=backends
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_SESSION_REMEMBER = True

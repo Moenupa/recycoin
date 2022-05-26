@@ -1,18 +1,20 @@
-{% extends '_base.html' %}
+{% extends '_flex.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}Log out{% endblock %}
+{% block title %}Log out{% endblock title %}
 
 
-{% block content %}
-<h1>Sign Out</h1>
-
+{% block flex %}
+<h1>Sign Out Confirmation</h1>
 <p>Are you sure you want to sign out?</p>
-
 <form method="post" action="{% url 'account_logout' %}">
   {% csrf_token %}
   {{ form|crispy }}
-  <button class="btn btn-danger" type="submit">Sign Out</button>
+  <div class="d-flex justify-content-center align-items-center flex-column">
+    <div class="flex-1 mb-2">
+      <button class="btn btn-danger px-4" type="submit">Sign Out</button>
+    </div>
+  </div>
 </form>
 
-{% endblock content %}
+{% endblock flex %}

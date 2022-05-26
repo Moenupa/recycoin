@@ -1,13 +1,43 @@
-{% extends '_base.html' %}
-{% load crispy_forms_tags %}
-
-{% block title %}Sign up{% endblock %}
-
-{% block content %}
-<h2>Sign up</h2>
-<form method="post">
+{% extends '_flex.html' %} {% load crispy_forms_tags %} {% block title %}Sign
+up{% endblock title %} {% block flex %}
+<h2 class="mb-4">Welcome to RECYCOIN</h2>
+<form method="post" class="w-100">
   {% csrf_token %}
-  {{ form|crispy }}
-  <button class="btn btn-success" type="submit">Sign up</button>
+  <div id="div_id_email" class="form-group row">
+    <label for="id_email" class="col-sm-2 col-form-label requiredField">
+      E-mail</span>
+    </label>
+    <div class="col-sm-10">
+      <input
+        type="email"
+        name="email"
+        placeholder="E-mail address"
+        autocomplete="email"
+        class="textinput textInput form-control"
+        required=""
+        id="id_email"
+      />
+    </div>
+  </div>
+  <div id="div_id_password1" class="form-group row">
+    <label for="id_password1" class="col-sm-2 col-form-label requiredField">
+      Password</span>
+    </label>
+    <div class="col-sm-10">
+      <input
+        type="password"
+        name="password1"
+        placeholder="Password"
+        autocomplete="new-password"
+        class="textinput textInput form-control"
+        required=""
+        id="id_password1"
+      />
+    </div>
+  </div>
+  
+  <div class="d-flex justify-content-center align-items-center flex-column">
+    <button class="btn btn-success px-4" type="submit">Sign Up</button>
+  </div>
 </form>
-{% endblock content %}
+{% endblock flex %}
