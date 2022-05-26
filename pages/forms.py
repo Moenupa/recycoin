@@ -4,9 +4,9 @@ from .models import *
 class RecycoinForm(forms.ModelForm):
     class Meta:
         model = RecycoinModel
-        fields = ['user','caption']
+        fields = ['user', 'amount']
         
-class ExchangeRecordFrom(forms.ModelForm):
+class ExchangeRecordForm(forms.ModelForm):
     class Meta:
         model = ExchangeRecordModel
-        fields = ['user', 'item_id']
+        fields = ['user', 'prize']

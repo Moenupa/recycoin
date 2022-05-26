@@ -1,0 +1,47 @@
+{% extends '_base.html' %} {% load crispy_forms_tags %}
+{% block title %}Log in{% endblock title %}
+{% block content %}
+
+<h2 class="mb-4">Welcome to RECYCOIN</h2>
+<form method="post" class="w-100">
+  {% csrf_token %}
+  <div id="div_id_login" class="form-group row">
+    <label for="id_login" class="col-sm-2 col-form-label requiredField">
+      E-mail
+    </label>
+    <div class="col-sm-10">
+      <input
+        type="email"
+        name="login"
+        placeholder="E-mail address"
+        autocomplete="email"
+        class="textinput textInput form-control"
+        required=""
+        id="id_login"
+      />
+    </div>
+  </div>
+  <div id="div_id_password" class="form-group row">
+    <label for="id_password" class="requiredField col-sm-2 col-form-label">
+      Password
+    </label>
+    <div class="col-sm-10">
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        autocomplete="current-password"
+        class="textinput textInput form-control"
+        required=""
+        id="id_password"
+      />
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center flex-column">
+    <div class="d-flex justify-content-center align-items-center flex-column">
+      <button class="btn btn-success px-4" type="submit">Log in</button>
+    </div>
+  </div>
+</form>
+{% endblock content %}
