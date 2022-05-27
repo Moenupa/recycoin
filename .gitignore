@@ -13,3 +13,4 @@ media
 
 .venv/
 */migrations/
+static/res/

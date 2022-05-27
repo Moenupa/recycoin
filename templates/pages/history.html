@@ -1,0 +1,44 @@
+{% extends '_base.html' %} 
+{% load crispy_forms_tags %}
+{% block title %}Exchange History{% endblock title %}
+{% block content %}
+
+<div class="d-flex align-items-center">
+  <div class="h2 w-100">
+    <div class="h2 w-100">
+      History
+    </div>
+    <div class="h6 w-100 text-secondary">
+      Track your journey with recycoins.
+    </div>
+  </div>
+  <div class="h5 w-100 text-right text-success">
+    <i class="fa-solid fa-coins"></i>
+    {{ user.wallet }}
+  </div>
+</div>
+
+{{ msg }}
+<div class="row">
+{% for record in records %}
+<div class="col-12 {% if records.count >= 4 %}col-md-6 {% endif %}p-2">
+  <div class="card w-100">
+    <div class="row justify-content-center">
+    {% if record.prize %}
+    <div class="col-4">
+      <img class="img-fluid" src="{{record.prize.img}}" alt="{{record.prize.img}}">
+    </div>
+    {% endif %}
+    <div class="{% if record.prize %}col-8{% else %}col-10{% endif %} py-2 d-flex align-items-center">
+      <div class="w-100">
+        <h5 class="card-title text-capitalize">{{ record.prize.item }}</h5>
+        <p class="card-text text-muted float-left pl-4"><i class="fa-solid fa-time"></i> {{ record.time }}</p>
+        <p class="card-text text-warning float-right pr-4"><i class="fa-solid fa-coins"></i> {{ record.amount }}</p>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+</div>
+{% endblock content %}

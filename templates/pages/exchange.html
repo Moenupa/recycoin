@@ -1,41 +1,61 @@
 {% extends '_base.html' %} {% load crispy_forms_tags %}
-{% block title %}Log in{% endblock title %}
+{% block title %}Exchange a gift{% endblock title %}
 {% block content %}
 
 <div class="d-flex align-items-center">
   <div class="h2 w-100">
     <div class="h2 w-100">
-      Price Exchange
+      Prize Exchange
     </div>
     <div class="h6 w-100 text-secondary">
       Exchange your recycoins to prizes! You've earned it!
     </div>
   </div>
-  <div class="h5 w-100 text-right text-success">
-    <i class="fa-solid fa-coins"></i>
-    {{ user.wallet }}
+  <div class="w-25 text-right text-success btn-group">
+    <a class="btn btn-success" style="background-color: var(--green) !important;">
+      <i class="fa-solid fa-coins"></i>
+      {{ user.wallet }}
+    </a>
+    <a class="btn btn-outline-success" href="/exchange/history">
+      <i class="fa-solid fa-history"></i>
+      History
+    </a>
   </div>
 </div>
 
-{{ msg }}
+<div class="alert alert-{{msg.level}}" role="alert">
+  {{msg.content}}
+</div>
 <div class="row">
 {% for prize in prizes %}
 <div class="col-12 {% if prizes.count >= 3 %}col-lg-4 {% endif %}{% if prizes.count >= 2 %}col-md-6 {% endif %}p-2">
-  <div class="card w-100" style="width: 18rem;">
+  <div class="card w-100">
+    {% if prizes.count >= 2 %}
     <img class="card-img-top" src={{prize.img}} alt={{prize.img}}>
+    {% else %}
+    <img class="img-fluid" src={{prize.img}} alt={{prize.img}} style="max-height: 40vh; object-fit: contain;">
+    {% endif %}
     <div class="card-body">
       <h5 class="card-title text-capitalize">{{ prize.item }}</h5>
       <p class="card-text text-warning float-right"><i class="fa-solid fa-coins"></i> {{ prize.price }}</p>
       {% if not lock %}
       <form method="post" action="/exchange/">
         {% csrf_token %}
-        <input type="hidden" name="prize" value={{prize.id}}/>
+        <input type="hidden" name="prize_id" value={{prize.id}}/>
         <button class="btn btn-sm btn-success px-4" type="submit"><i class="mr-2 fa-solid fa-right-left"></i>Exchange</button>
       </form>
       {% endif %}
     </div>
   </div>
 </div>
+{% if lock %}
+<div class="col-12 text-center">
+  <a class="btn btn-success" href="/exchange">
+    <i class="fa-solid fa-backward mr-1"></i>
+    back to exchange
+  </a>
+</div>
+{% endif %}
 {% endfor %}
 </div>
 {% endblock content %}
